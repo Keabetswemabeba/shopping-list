@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { AddShopList } from "./Components/AddShopList";
+import { ViewShopList } from "./Components/ViewShopList";
 
 function App() {
+  const [itemlistToEdit, setItemListToEdit] = useState(null);
+
+  const handleEditIcon = (shoplist) => {
+    setItemListToEdit(shoplist);
+  };
+
+  const cancelUpdate= () => {
+    setItemListToEdit(null)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <h1>
+        <b>Shopping List</b>
+      </h1>
+      <div className="add-and-view-list">
+        <AddShopList itemlistToEdit={itemlistToEdit}
+        />
+        <ViewShopList
+          handleEditIcon={handleEditIcon}
+          itemlistToEdit={itemlistToEdit}
+          cancelUpdate={cancelUpdate}
+        />
+      </div>
     </div>
   );
 }
